@@ -1,0 +1,34 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/KioskPos.Analytics.Application.Contracts/KioskPos.Analytics.Application.Contracts.csproj" />
+    <Project Path="src/KioskPos.Analytics.Application/KioskPos.Analytics.Application.csproj" />
+    <Project Path="src/KioskPos.Analytics.AuthServer/KioskPos.Analytics.AuthServer.csproj" />
+    <Project Path="src/KioskPos.Analytics.Blazor.Client/KioskPos.Analytics.Blazor.Client.csproj" />
+    <Project Path="src/KioskPos.Analytics.Blazor.Server.Tiered/KioskPos.Analytics.Blazor.Server.Tiered.csproj" />
+    <Project Path="src/KioskPos.Analytics.Blazor.Server/KioskPos.Analytics.Blazor.Server.csproj" />
+    <Project Path="src/KioskPos.Analytics.Blazor.WebApp.Client/KioskPos.Analytics.Blazor.WebApp.Client.csproj" />
+    <Project Path="src/KioskPos.Analytics.Blazor.WebApp.Tiered.Client/KioskPos.Analytics.Blazor.WebApp.Tiered.Client.csproj" />
+    <Project Path="src/KioskPos.Analytics.Blazor.WebApp.Tiered/KioskPos.Analytics.Blazor.WebApp.Tiered.csproj" />
+    <Project Path="src/KioskPos.Analytics.Blazor.WebApp/KioskPos.Analytics.Blazor.WebApp.csproj" />
+    <Project Path="src/KioskPos.Analytics.Blazor/KioskPos.Analytics.Blazor.csproj" />
+    <Project Path="src/KioskPos.Analytics.DbMigrator/KioskPos.Analytics.DbMigrator.csproj" />
+    <Project Path="src/KioskPos.Analytics.Domain.Shared/KioskPos.Analytics.Domain.Shared.csproj" />
+    <Project Path="src/KioskPos.Analytics.Domain/KioskPos.Analytics.Domain.csproj" />
+    <Project Path="src/KioskPos.Analytics.EntityFrameworkCore/KioskPos.Analytics.EntityFrameworkCore.csproj" />
+    <Project Path="src/KioskPos.Analytics.HttpApi.Client/KioskPos.Analytics.HttpApi.Client.csproj" />
+    <Project Path="src/KioskPos.Analytics.HttpApi.Host/KioskPos.Analytics.HttpApi.Host.csproj" />
+    <Project Path="src/KioskPos.Analytics.HttpApi/KioskPos.Analytics.HttpApi.csproj" />
+    <Project Path="src/KioskPos.Analytics.MongoDB/KioskPos.Analytics.MongoDB.csproj" />
+    <Project Path="src/KioskPos.Analytics.Web.Host/KioskPos.Analytics.Web.Host.csproj" />
+    <Project Path="src/KioskPos.Analytics.Web/KioskPos.Analytics.Web.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/KioskPos.Analytics.Application.Tests/KioskPos.Analytics.Application.Tests.csproj" />
+    <Project Path="test/KioskPos.Analytics.Domain.Tests/KioskPos.Analytics.Domain.Tests.csproj" />
+    <Project Path="test/KioskPos.Analytics.EntityFrameworkCore.Tests/KioskPos.Analytics.EntityFrameworkCore.Tests.csproj" />
+    <Project Path="test/KioskPos.Analytics.HttpApi.Client.ConsoleTestApp/KioskPos.Analytics.HttpApi.Client.ConsoleTestApp.csproj" />
+    <Project Path="test/KioskPos.Analytics.MongoDB.Tests/KioskPos.Analytics.MongoDB.Tests.csproj" />
+    <Project Path="test/KioskPos.Analytics.TestBase/KioskPos.Analytics.TestBase.csproj" />
+    <Project Path="test/KioskPos.Analytics.Web.Tests/KioskPos.Analytics.Web.Tests.csproj" />
+  </Folder>
+</Solution>
