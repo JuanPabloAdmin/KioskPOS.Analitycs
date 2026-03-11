@@ -4,11 +4,14 @@ using System.Collections.Generic;
 namespace KioskPos.Analytics.Dashboard;
 
 /// <summary>
-/// DTO principal del Dashboard — resumen de un día de negocio.
+/// DTO principal del Dashboard — VERSIÓN MEJORADA con KPIs extendidos.
+/// REEMPLAZA el DashboardSummaryDto anterior.
 /// </summary>
 public class DashboardSummaryDto
 {
     public string BusinessDay { get; set; } = string.Empty;
+
+    // ── KPIs principales ──
     public decimal TotalRevenue { get; set; }
     public decimal TotalNetRevenue { get; set; }
     public int TotalOrders { get; set; }
@@ -17,22 +20,47 @@ public class DashboardSummaryDto
     public int TotalItemsSold { get; set; }
     public int TotalGuests { get; set; }
 
-    // Desglose por tipo de pedido
+    // ── KPIs NUEVOS ──
+    public decimal VatCollected { get; set; }
+    public string PeakHour { get; set; } = "—";
+    public decimal PeakHourRevenue { get; set; }
+    public int PeakHourOrders { get; set; }
+    public int LiveOrdersCount { get; set; }
+    public int LiveTicketsCount { get; set; }
+
+    // ── Comparativa con ayer (%) ──
+    public decimal? RevenueChangePercent { get; set; }
+    public decimal? OrdersChangePercent { get; set; }
+    public decimal? TicketChangePercent { get; set; }
+    public decimal? ItemsChangePercent { get; set; }
+    public decimal? YesterdayRevenue { get; set; }
+    public int? YesterdayOrders { get; set; }
+
+    // ── Desglose por tipo de pedido ──
     public int TableOrders { get; set; }
     public int TakeAwayOrders { get; set; }
     public int DeliveryOrders { get; set; }
+    public decimal TableRevenue { get; set; }
+    public decimal TakeAwayRevenue { get; set; }
+    public decimal DeliveryRevenue { get; set; }
 
-    // Desglose por forma de pago
+    // ── Desglose por forma de pago ──
     public List<PaymentBreakdownDto> PaymentBreakdown { get; set; } = new();
 
-    // Top productos
+    // ── Top productos ──
     public List<TopProductDto> TopProducts { get; set; } = new();
 
-    // Top familias
+    // ── Top familias ──
     public List<TopFamilyDto> TopFamilies { get; set; } = new();
 
-    // Ventas por hora
+    // ── Ventas por hora ──
     public List<HourlySalesDto> HourlySales { get; set; } = new();
+
+    // ── Multi-kiosk ──
+    public string? KioskId { get; set; }
+    public string? KioskName { get; set; }
+    public string? KioskColor { get; set; }
+    public string? KioskIcon { get; set; }
 }
 
 public class PaymentBreakdownDto
@@ -50,6 +78,8 @@ public class TopProductDto
     public string? FamilyName { get; set; }
     public int QuantitySold { get; set; }
     public decimal TotalRevenue { get; set; }
+    public decimal AveragePrice { get; set; }
+    public int OrderAppearances { get; set; }
 }
 
 public class TopFamilyDto
@@ -67,4 +97,6 @@ public class HourlySalesDto
     public string HourLabel { get; set; } = string.Empty;
     public int OrderCount { get; set; }
     public decimal Revenue { get; set; }
+    public decimal AverageTicket { get; set; }
+    public int ItemCount { get; set; }
 }

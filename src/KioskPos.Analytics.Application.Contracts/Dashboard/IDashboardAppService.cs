@@ -6,6 +6,10 @@ namespace KioskPos.Analytics.Dashboard;
 
 public interface IDashboardAppService : IApplicationService
 {
+
+    Task<DashboardSummaryDto> GetKioskDailySummaryAsync(DateTime businessDay, Guid kioskId);
+    Task<MultiKioskSummaryDto> GetMultiKioskSummaryAsync(DateTime businessDay);
+
     /// <summary>
     /// Obtiene el resumen del dashboard para un día específico.
     /// </summary>

@@ -15,6 +15,7 @@ public class PosSalesOrder
     public string? PosName { get; set; }
     public int? UserId { get; set; }
     public string? UserName { get; set; }
+    public int WorkplaceId { get; set; }
     public int? CustomerId { get; set; }
     public string? CustomerName { get; set; }
     public int? SaleCenterId { get; set; }

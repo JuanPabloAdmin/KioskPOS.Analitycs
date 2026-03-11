@@ -15,6 +15,8 @@ using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
 
+
+
 namespace KioskPos.Analytics.EntityFrameworkCore;
 
 [ReplaceDbContext(typeof(IIdentityDbContext))]
@@ -41,6 +43,7 @@ public class AnalyticsDbContext :
      */
 
     // ═══ Analytics Entities ═══
+    public DbSet<KioskRegistration> KioskRegistrations { get; set; }
     public DbSet<PosConnectionConfig> PosConnectionConfigs { get; set; }
     public DbSet<SyncHistory> SyncHistories { get; set; }
     public DbSet<CachedSalesOrder> CachedSalesOrders { get; set; }
@@ -83,6 +86,16 @@ public class AnalyticsDbContext :
         builder.ConfigureTenantManagement();
 
         /* Configure your own tables/entities inside here */
+
+        builder.Entity<KioskRegistration>(b =>
+        {
+            b.ToTable(AnalyticsConsts.DbTablePrefix + "KioskRegistrations", AnalyticsConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.Property(x => x.DisplayName).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Color).HasMaxLength(16);
+            b.Property(x => x.Icon).HasMaxLength(16);
+            b.HasIndex(x => new { x.TenantId, x.WorkplaceId });
+        });
 
         builder.Entity<PosConnectionConfig>(b =>
         {
