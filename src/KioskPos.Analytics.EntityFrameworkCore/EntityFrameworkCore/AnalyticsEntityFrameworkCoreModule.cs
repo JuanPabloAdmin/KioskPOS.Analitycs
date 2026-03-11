@@ -12,6 +12,7 @@ using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using KioskPos.Analytics.EntityFrameworkCore.KioskReadOnly;
 
 namespace KioskPos.Analytics.EntityFrameworkCore;
 
@@ -48,6 +49,18 @@ public class AnalyticsEntityFrameworkCoreModule : AbpModule
                 /* The main point to change your DBMS.
                  * See also AnalyticsMigrationsDbContextFactory for EF Core tooling. */
             options.UseSqlServer();
+        });
+
+        context.Services.AddAbpDbContext<KioskReadOnlyDbContext>(options =>
+        {
+            options.AddDefaultRepositories(includeAllEntities: false);
+        });
+
+        Configure<AbpDbContextOptions>(options =>
+        {
+            // El DbContext principal (Analytics) ya usa SQL Server (configurado arriba).
+            // Aquí configuramos específicamente el Kiosk para que también use SQL Server.
+            options.UseSqlServer<KioskReadOnlyDbContext>();
         });
 
     }

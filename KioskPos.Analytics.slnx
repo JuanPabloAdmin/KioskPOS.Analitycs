@@ -18,6 +18,7 @@
     <Project Path="src/KioskPos.Analytics.HttpApi.Client/KioskPos.Analytics.HttpApi.Client.csproj" />
     <Project Path="src/KioskPos.Analytics.HttpApi.Host/KioskPos.Analytics.HttpApi.Host.csproj" />
     <Project Path="src/KioskPos.Analytics.HttpApi/KioskPos.Analytics.HttpApi.csproj" />
+    <Project Path="src/KioskPos.Analytics.Infrastructure/KioskPos.Analytics.Infrastructure.csproj" />
     <Project Path="src/KioskPos.Analytics.MongoDB/KioskPos.Analytics.MongoDB.csproj" />
     <Project Path="src/KioskPos.Analytics.Web.Host/KioskPos.Analytics.Web.Host.csproj" />
     <Project Path="src/KioskPos.Analytics.Web/KioskPos.Analytics.Web.csproj" />

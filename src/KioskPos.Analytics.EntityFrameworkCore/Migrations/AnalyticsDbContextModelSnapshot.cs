@@ -19,10 +19,438 @@ namespace KioskPos.Analytics.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.SqlServer)
-                .HasAnnotation("ProductVersion", "10.0.2")
+                .HasAnnotation("ProductVersion", "10.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("KioskPos.Analytics.Analytics.Entities.CachedInvoice", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateOnly>("BusinessDay")
+                        .HasColumnType("date");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<string>("CustomerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DocumentType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ExternalCustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ExternalPosId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ExternalUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("GlobalId")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<decimal>("GrossAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("InvoiceDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LineCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LinesJson")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("NetAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PaymentsJson")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("PosConnectionConfigId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("PosProcessedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PrimaryPaymentMethod")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Serie")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("nvarchar(32)");
+
+                    b.Property<Guid?>("TenantId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("TenantId");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("VatAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("VatIncluded")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TenantId", "BusinessDay");
+
+                    b.HasIndex("TenantId", "GlobalId")
+                        .IsUnique()
+                        .HasFilter("[TenantId] IS NOT NULL AND [GlobalId] IS NOT NULL");
+
+                    b.ToTable("AppCachedInvoices", (string)null);
+                });
+
+            modelBuilder.Entity("KioskPos.Analytics.Analytics.Entities.CachedSalesOrder", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateOnly>("BusinessDay")
+                        .HasColumnType("date");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<int?>("ExternalCustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ExternalPosId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ExternalSaleCenterId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ExternalUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("GlobalId")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<decimal>("GrossAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("Guests")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ItemCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LineCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LinesJson")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("NetAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OrderType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PaymentsJson")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("PosConnectionConfigId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("PosProcessedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PrimaryPaymentMethod")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SaleCenterName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SaleLocationName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Serie")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("nvarchar(32)");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("TenantId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("TenantId");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("VatAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TenantId", "BusinessDay");
+
+                    b.HasIndex("TenantId", "GlobalId")
+                        .IsUnique()
+                        .HasFilter("[TenantId] IS NOT NULL AND [GlobalId] IS NOT NULL");
+
+                    b.ToTable("AppCachedSalesOrders", (string)null);
+                });
+
+            modelBuilder.Entity("KioskPos.Analytics.Analytics.Entities.DashboardSnapshot", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("AverageTicket")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateOnly>("BusinessDay")
+                        .HasColumnType("date");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<int>("DeliveryOrders")
+                        .HasColumnType("int");
+
+                    b.Property<string>("HourlySalesJson")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentBreakdownJson")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("PosConnectionConfigId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("TableOrders")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TakeAwayOrders")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("TenantId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("TenantId");
+
+                    b.Property<string>("TopFamiliesJson")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TopProductsJson")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TotalGuests")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalInvoices")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalItemsSold")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalNetRevenue")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("TotalOrders")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalRevenue")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TenantId", "PosConnectionConfigId", "BusinessDay")
+                        .IsUnique()
+                        .HasFilter("[TenantId] IS NOT NULL");
+
+                    b.ToTable("AppDashboardSnapshots", (string)null);
+                });
+
+            modelBuilder.Entity("KioskPos.Analytics.Analytics.Entities.PosConnectionConfig", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AcmsApiToken")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<string>("AcmsBaseUrl")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<string>("ApiBaseUrl")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<string>("ApiToken")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<string>("DefaultPriceListId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("DisplayName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("ExtraProperties")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<string>("KioskIdentifier")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<DateTime?>("LastSuccessfulSync")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PosId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProviderType")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("TenantId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("TenantId");
+
+                    b.Property<string>("WorkplaceId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TenantId");
+
+                    b.ToTable("AppPosConnectionConfigs", (string)null);
+                });
+
+            modelBuilder.Entity("KioskPos.Analytics.Analytics.Entities.SyncHistory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateOnly?>("BusinessDay")
+                        .HasColumnType("date");
+
+                    b.Property<DateTime?>("CompletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<string>("Details")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ErrorMessage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("PosConnectionConfigId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("RecordsSynced")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SyncType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("TenantId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("TenantId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TenantId", "PosConnectionConfigId", "BusinessDay");
+
+                    b.ToTable("AppSyncHistories", (string)null);
+                });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>
                 {

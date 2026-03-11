@@ -11,6 +11,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.3">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
     <PackageReference Include="Serilog.Sinks.Async" Version="2.1.0" />
     <PackageReference Include="Volo.Abp.AspNetCore.MultiTenancy" Version="10.1.1" />
@@ -28,6 +32,7 @@
     <ProjectReference Include="..\KioskPos.Analytics.Application\KioskPos.Analytics.Application.csproj" />
     <ProjectReference Include="..\KioskPos.Analytics.EntityFrameworkCore\KioskPos.Analytics.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\KioskPos.Analytics.HttpApi\KioskPos.Analytics.HttpApi.csproj" />
+    <ProjectReference Include="..\KioskPos.Analytics.Infrastructure\KioskPos.Analytics.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

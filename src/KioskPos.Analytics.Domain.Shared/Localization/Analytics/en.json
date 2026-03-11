@@ -1,9 +1,21 @@
 {
   "culture": "en",
   "texts": {
-    "AppName": "Analytics",
-    "Menu:Home": "Home",
-    "Welcome": "Welcome",
-    "LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information, visit abp.io."
+    "Permission:Analytics": "Analytics",
+    "Permission:Dashboard": "Dashboard",
+    "Permission:Dashboard.ViewRevenue": "View Revenue",
+    "Permission:Dashboard.ViewProducts": "View Products",
+    "Permission:Dashboard.ExportData": "Export Data",
+    "Permission:Sales": "Sales",
+    "Permission:Sales.ViewOrders": "View Orders",
+    "Permission:Sales.ViewInvoices": "View Invoices",
+    "Permission:Sales.ViewDetail": "View Detail",
+    "Permission:Products": "Products",
+    "Permission:Products.ViewAnalytics": "View Analytics",
+    "Permission:Products.ViewCosts": "View Costs",
+    "Permission:PosConfig": "POS Configuration",
+    "Permission:PosConfig.Manage": "Manage",
+    "Permission:PosConfig.TestConnection": "Test Connection",
+    "Permission:PosConfig.Sync": "Sync"
   }
 }

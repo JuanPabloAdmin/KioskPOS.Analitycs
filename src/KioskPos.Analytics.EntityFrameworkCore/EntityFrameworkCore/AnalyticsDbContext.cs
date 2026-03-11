@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using KioskPos.Analytics.Analytics.Entities;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
@@ -38,6 +40,12 @@ public class AnalyticsDbContext :
      * uses this DbContext on runtime. Otherwise, it will use its own DbContext class.
      */
 
+    // ═══ Analytics Entities ═══
+    public DbSet<PosConnectionConfig> PosConnectionConfigs { get; set; }
+    public DbSet<SyncHistory> SyncHistories { get; set; }
+    public DbSet<CachedSalesOrder> CachedSalesOrders { get; set; }
+    public DbSet<CachedInvoice> CachedInvoices { get; set; }
+    public DbSet<DashboardSnapshot> DashboardSnapshots { get; set; }
     //Identity
     public DbSet<IdentityUser> Users { get; set; }
     public DbSet<IdentityRole> Roles { get; set; }
@@ -75,6 +83,62 @@ public class AnalyticsDbContext :
         builder.ConfigureTenantManagement();
 
         /* Configure your own tables/entities inside here */
+
+        builder.Entity<PosConnectionConfig>(b =>
+        {
+            b.ToTable(AnalyticsConsts.DbTablePrefix + "PosConnectionConfigs", AnalyticsConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.Property(x => x.DisplayName).IsRequired().HasMaxLength(256);
+            b.Property(x => x.ApiBaseUrl).IsRequired().HasMaxLength(512);
+            b.Property(x => x.ApiToken).IsRequired().HasMaxLength(512);
+            b.Property(x => x.AcmsBaseUrl).HasMaxLength(512);
+            b.Property(x => x.AcmsApiToken).HasMaxLength(512);
+            b.Property(x => x.KioskIdentifier).HasMaxLength(128);
+            b.HasIndex(x => x.TenantId);
+        });
+
+        builder.Entity<SyncHistory>(b =>
+        {
+            b.ToTable(AnalyticsConsts.DbTablePrefix + "SyncHistories", AnalyticsConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.HasIndex(x => new { x.TenantId, x.PosConnectionConfigId, x.BusinessDay });
+        });
+
+        builder.Entity<CachedSalesOrder>(b =>
+        {
+            b.ToTable(AnalyticsConsts.DbTablePrefix + "CachedSalesOrders", AnalyticsConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.HasIndex(x => new { x.TenantId, x.BusinessDay });
+            b.HasIndex(x => new { x.TenantId, x.GlobalId }).IsUnique();
+            b.Property(x => x.Serie).IsRequired().HasMaxLength(32);
+            b.Property(x => x.GlobalId).HasMaxLength(128);
+            b.Property(x => x.LinesJson).HasColumnType("nvarchar(max)");
+            b.Property(x => x.PaymentsJson).HasColumnType("nvarchar(max)");
+        });
+
+        builder.Entity<CachedInvoice>(b =>
+        {
+            b.ToTable(AnalyticsConsts.DbTablePrefix + "CachedInvoices", AnalyticsConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.HasIndex(x => new { x.TenantId, x.BusinessDay });
+            b.HasIndex(x => new { x.TenantId, x.GlobalId }).IsUnique();
+            b.Property(x => x.Serie).IsRequired().HasMaxLength(32);
+            b.Property(x => x.GlobalId).HasMaxLength(128);
+            b.Property(x => x.LinesJson).HasColumnType("nvarchar(max)");
+            b.Property(x => x.PaymentsJson).HasColumnType("nvarchar(max)");
+        });
+
+        builder.Entity<DashboardSnapshot>(b =>
+        {
+            b.ToTable(AnalyticsConsts.DbTablePrefix + "DashboardSnapshots", AnalyticsConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.HasIndex(x => new { x.TenantId, x.PosConnectionConfigId, x.BusinessDay }).IsUnique();
+            b.Property(x => x.PaymentBreakdownJson).HasColumnType("nvarchar(max)");
+            b.Property(x => x.TopProductsJson).HasColumnType("nvarchar(max)");
+            b.Property(x => x.TopFamiliesJson).HasColumnType("nvarchar(max)");
+            b.Property(x => x.HourlySalesJson).HasColumnType("nvarchar(max)");
+        });
+
 
         //builder.Entity<YourEntity>(b =>
         //{

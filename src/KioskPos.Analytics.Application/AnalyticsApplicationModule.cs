@@ -1,13 +1,16 @@
-﻿using Volo.Abp.Account;
-using Volo.Abp.Mapperly;
+﻿using KioskPos.Analytics.BackgroundJobs;
+using Microsoft.Extensions.DependencyInjection;
+using System.Threading.Tasks;
+using Volo.Abp;
+using Volo.Abp.Account;
+using Volo.Abp.BackgroundWorkers;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;
+using Volo.Abp.Mapperly;
 using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
-using Microsoft.Extensions.DependencyInjection;
-
 namespace KioskPos.Analytics;
 
 [DependsOn(
@@ -25,5 +28,13 @@ public class AnalyticsApplicationModule : AbpModule
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         context.Services.AddMapperlyObjectMapper<AnalyticsApplicationModule>();
+    }
+
+    public override async Task OnApplicationInitializationAsync(ApplicationInitializationContext context)
+    {
+        await base.OnApplicationInitializationAsync(context);
+
+        // Registrar el worker de sincronización automática
+        await context.AddBackgroundWorkerAsync<AutoSyncWorker>();
     }
 }
